@@ -7,19 +7,37 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden; /* Prevent scrollbars from appearing on body */
 }
 
 .container {
     position: relative;
-    width: 300px;
-    height: 500px; /* Adjust height to suit your needs */
+    width: 80vw; /* 80% of the viewport width */
+    height: 80vh; /* 80% of the viewport height */
+    max-width: 1200px; /* Optional: Maximum width to avoid excessive stretching */
+    max-height: 800px; /* Optional: Maximum height to avoid excessive stretching */
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Prevent scrollbars inside the container */
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+    align-items: center;
+    padding: 10px; /* Add some padding for spacing */
+    background: #eee; /* Light background for the navbar */
+    border-bottom: 1px solid #ddd; /* Optional: Border for the bottom of the navbar */
 }
 
 .stack {
     position: relative;
     width: 100%;
-    height: calc(100% - 60px); /* Leave space for the button */
-    overflow: hidden; /* Prevents scrollbars from appearing */
+    height: calc(100% - 60px); /* Adjust height to fill container minus navbar */
+    overflow: hidden; /* Prevent scrollbars from appearing */
 }
 
 .card {
@@ -27,36 +45,75 @@ body {
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: -20px; /* Overlap effect */
-    padding: 15px;
+    width: 300px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    padding: 0; /* Remove default padding */
     box-sizing: border-box;
-    height: 150px;
-    overflow-y: auto;
-    position: relative;
+    overflow: hidden;
+    position: absolute; /* Allows for free positioning */
+    cursor: move;
     z-index: 1;
+    display: grid;
+    grid-template-rows: repeat(10, 1fr); /* Create rows for lines */
 }
 
-.card:focus {
-    outline: none;
+.card-content {
+    grid-row: 1 / -1; /* Span across all rows */
+    overflow-y: auto;
+    padding: 15px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    padding-top: 1px; /* Align text with the lines */
+}
+
+.card-content::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: calc(100% - 30px); /* Adjust to fit within padding */
+    height: 1px;
+    background-color: red; /* First line is red */
+    top: 0;
+    left: 15px; /* Match padding */
+}
+
+.card-content::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: calc(100% - 30px); /* Adjust to fit within padding */
+    height: calc(100% - 1px); /* Fill the rest of the height minus the top line */
+    top: 1px;
+    left: 15px; /* Match padding */
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 19px,
+        blue 19px,
+        blue 20px
+    ); /* Creates a repeating pattern of blue lines */
 }
 
 .add-card-btn {
-    position: absolute;
-    bottom: 10px; /* Adjust to position the button within the container */
-    right: 10px;
-    background: #007bff;
-    color: white;
-    border: none;
+    background: transparent; /* Transparent background */
+    color: #000; /* Black plus sign */
+    border: none; /* Remove border */
     border-radius: 50%;
     width: 50px;
     height: 50px;
     font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the plus sign horizontally and vertically */
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s;
-    z-index: 2; /* Ensure the button is on top of the cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Shadow for visual effect */
+    transition: background 0.3s, color 0.3s;
 }
 
 .add-card-btn:hover {
-    background: #0056b3;
+    background: rgba(0, 0, 0, 0.1); /* Light gray background on hover */
+    color: #333; /* Darker color for the plus sign on hover */
 }
