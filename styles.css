@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    width: 300px;
+    height: 500px; /* Adjust height to suit your needs */
+}
+
+.stack {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 60px); /* Leave space for the button */
+    overflow: hidden; /* Prevents scrollbars from appearing */
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: -20px; /* Overlap effect */
+    padding: 15px;
+    box-sizing: border-box;
+    height: 150px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.card:focus {
+    outline: none;
+}
+
+.add-card-btn {
+    position: absolute;
+    bottom: 10px; /* Adjust to position the button within the container */
+    right: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+    z-index: 2; /* Ensure the button is on top of the cards */
+}
+
+.add-card-btn:hover {
+    background: #0056b3;
+}
